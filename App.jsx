@@ -46,11 +46,11 @@ function App() {
 
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="loading-screen">Loading...</div>;
   }
 
   if (error) {
-    return <div>Encountering error... {auth.error.message}</div>;
+    return <div className="error-message">Encountering error... {error.message}</div>;
   }
 
   return (
@@ -59,33 +59,37 @@ function App() {
         {!isAuthenticated ?
           <button onClick={() => signinRedirect()}>Sign in</button>
           : <button onClick={() => signOutRedirect()}>Sign out</button>}
-
       </div>
+
       <div className="download-container">
-        <div>
-          <input type="text" placeholder="file owner's email" value={email} onChange={e => setEmail(e.target.value)} />
-          <input type="text" placeholder="secret-key" value={secret} onChange={e => setSecret(e.target.value)} />
-        </div>
-        <div>
+        <h1 className="section-title">Download File from S3</h1>
+        <div className="input-group">
+          <div className="input-row">
+            <input type="text" placeholder="File owner's email" value={email} onChange={e => setEmail(e.target.value)} />
+            <input type="text" placeholder="Secret-key" value={secret} onChange={e => setSecret(e.target.value)} />
+          </div>
           <button onClick={() => { getFileFromS3(`${btoa(email)}${secret?.split("-")[0]}.${secret?.split("-")[1]}`) }}>
             Download
           </button>
         </div>
       </div>
-      {
-        isAuthenticated && <div className="upload-container">
-          <input type="text" value={userEmail} disabled={true} />
-          <input type="text" placeholder="secret-key" value={secret} onChange={e => setSecret(e.target.value)} />
-          <div>
-            <h1>Upload File to S3</h1>
-            <input type="file" onChange={handleFileChange} />
-            <button onClick={handleUpload} disabled={uploading}>
-              {uploading ? "Uploading..." : "Upload"}
-            </button>
-            {message && <p>{message}</p>}
+
+      {isAuthenticated && (
+        <div className="upload-container">
+          <h1 className="section-title">Upload File to S3</h1>
+          <div className="input-group">
+            <input type="text" value={userEmail} disabled={true} />
+            <input type="text" placeholder="Secret-key" value={secret} onChange={e => setSecret(e.target.value)} />
+            <div className="file-upload-section">
+              <input type="file" onChange={handleFileChange} />
+              <button onClick={handleUpload} disabled={uploading}>
+                {uploading ? "Uploading..." : "Upload"}
+              </button>
+            </div>
+            {message && <p className="message">{message}</p>}
           </div>
         </div>
-      }
+      )}
     </>
   );
 }
