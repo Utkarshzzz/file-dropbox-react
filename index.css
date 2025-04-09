@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f5f8fa;
 }
 
 h1 {
@@ -42,18 +43,64 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #646cff;
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s ease;
 }
 
 button:hover {
-  border-color: #646cff;
+  background-color: #535bf2;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-loading {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-message {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #646cff;
+}
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #646cff;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #ff6464;
+  background-color: rgba(255, 100, 100, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -67,6 +114,49 @@ button:focus-visible {
   }
 
   button {
-    background-color: #f9f9f9;
+    background-color: #646cff;
+    color: white;
+  }
+
+  body {
+    background-color: #f5f8fa;
+  }
+
+  input[type="text"],
+  input[type="file"] {
+    color: #333333;
+    background-color: #ffffff;
+  }
+
+  input[type="text"]::placeholder {
+    color: #888888;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type="text"],
+  input[type="file"] {
+    background-color: #333333;
+    color: #ffffff;
+    border-color: #555555;
+  }
+
+  input[type="text"]::placeholder {
+    color: #aaaaaa;
+  }
+
+  input[disabled] {
+    background-color: #2a2a2a;
+    color: #bbbbbb;
+  }
+
+  .message {
+    background-color: #2a2a2a;
+    color: #ffffff;
+  }
+
+  .section-title {
+    color: #f0f0f0;
   }
 }
