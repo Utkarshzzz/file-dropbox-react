@@ -15,7 +15,9 @@ const Auth = () => {
         if (isAuthenticated) fetchIdentityId();
     })
     return (
-        <div style={{ display: 'flex', width: '100vh', justifyContent: 'center' }}>Authenticating...</div>
+        <div className="auth-loading">
+            <div className="auth-message">Authenticating...</div>
+        </div>
     )
 }
 
